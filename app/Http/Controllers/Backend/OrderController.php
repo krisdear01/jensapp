@@ -12,9 +12,12 @@ class OrderController extends Controller
 {
     protected $orderService;
 
-    public function __construct(OrderService $orderService)
+    protected $productService;
+
+    public function __construct(OrderService $orderService, \App\Services\ProductService $productService)
     {
         $this->orderService = $orderService;
+        $this->productService = $productService;
     }
 
     public function FinalInvoice(Request $request)
@@ -61,7 +64,7 @@ class OrderController extends Controller
 
     public function StockManage()
     {
-        $product = Product::latest()->get();
+        $product = $this->productService->getAllProducts();
         return view('backend.stock.all_stock', compact('product'));
     }
 
@@ -78,7 +81,7 @@ class OrderController extends Controller
 
     public function OrderDueAjax($id)
     {
-        $order = Order::findOrFail($id);
+        $order = $this->orderService->getOrderById($id);
         return response()->json($order);
     }
 
