@@ -100,6 +100,9 @@
                     <li>
                         <a href="{{ route('add.supplier') }}">Add Supplier</a>
                     </li>
+                    <li>
+                        <a href="{{ route('details.supplier', ['id' => 1]) }}">Supplier Details</a>
+                    </li>
                     
                 </ul>
             </div>
@@ -148,7 +151,11 @@
                     <li>
                         <a href="{{ route('employee.attend.list') }}">Employee Attendence List </a>
                     </li>
-                
+                    @if(Auth::user()->can('attendence.add'))
+                    <li>
+                        <a href="{{ route('add.employee.attend') }}">Add Employee Attendence</a>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </li>
@@ -166,7 +173,11 @@
                     <li>
                         <a href="{{ route('all.category') }}">All Category </a>
                     </li>
-                
+                    @if(Auth::user()->can('category.add'))
+                    <li>
+                        <a href="{{ route('all.category') }}">Add Category</a>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </li>
@@ -190,7 +201,16 @@
                      <li>
                         <a href="{{ route('import.product') }}">Import Product </a>
                     </li>
-                
+                    @if(Auth::user()->can('product.export'))
+                    <li>
+                        <a href="{{ route('export') }}">Export Product</a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->can('product.barcode'))
+                    <li>
+                        <a href="{{ route('barcode.product', ['id' => 1]) }}">Barcode Product</a>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </li>
@@ -216,8 +236,16 @@
             <li>
                 <a href="{{ route('pending.due') }}">Pending Due </a>
             </li>
-            
-        
+            @if(Auth::user()->can('orders.view'))
+            <li>
+                <a href="{{ route('order.details', ['order_id' => 1]) }}">Order Details</a>
+            </li>
+            @endif
+            @if(Auth::user()->can('orders.download'))
+            <li>
+                <a href="{{ route('order.invoice-download', ['order_id' => 1]) }}">Download Invoice</a>
+            </li>
+            @endif
         </ul>
     </div>
 </li>
@@ -264,8 +292,26 @@
              <li>
                 <a href="{{ route('all.roles.permission') }}">All Roles in Permission </a>
             </li>
- 
-        
+            @if(Auth::user()->can('permission.add'))
+            <li>
+                <a href="{{ route('add.permission') }}">Add Permission</a>
+            </li>
+            @endif
+            @if(Auth::user()->can('permission.edit'))
+            <li>
+                <a href="{{ route('edit.permission', ['id' => 1]) }}">Edit Permission</a>
+            </li>
+            @endif
+            @if(Auth::user()->can('roles.add'))
+            <li>
+                <a href="{{ route('add.roles') }}">Add Roles</a>
+            </li>
+            @endif
+            @if(Auth::user()->can('roles.edit'))
+            <li>
+                <a href="{{ route('edit.roles', ['id' => 1]) }}">Edit Roles</a>
+            </li>
+            @endif
         </ul>
     </div>
 </li>
@@ -286,8 +332,12 @@
 
             <li>
                 <a href="{{ route('add.admin') }}">Add Admin </a>
-            </li> 
-        
+            </li>
+            @if(Auth::user()->can('admin.edit'))
+            <li>
+                <a href="{{ route('edit.admin', ['id' => 1]) }}">Edit Admin</a>
+            </li>
+            @endif
         </ul>
     </div>
 </li>
@@ -319,7 +369,11 @@
         <li>
             <a href="{{ route('year.expense') }}">Yearly Expense</a>
         </li>
-        
+        @if(Auth::user()->can('expense.edit'))
+        <li>
+            <a href="{{ route('edit.expense', ['id' => 1]) }}">Edit Expense</a>
+        </li>
+        @endif
     </ul>
                             </div>
                         </li>
@@ -336,8 +390,7 @@
     <ul class="nav-second-level">
         <li>
             <a href="{{ route('database.backup') }}">Database Backup </a>
-        </li> 
-        
+        </li>
     </ul>
            </div>
           </li>
