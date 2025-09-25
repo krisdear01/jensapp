@@ -25,9 +25,12 @@ class PosController extends Controller
             'id' => $request->id, 
             'name' => $request->name, 
             'qty' => $request->qty, 
-            'price' => $request->price, 
-            'weight' => 20, 
-            'options' => ['size' => 'large']]);
+            'price' => $request->price,
+            'options' => [
+                'size' => 'large',
+                'weight' => 20,
+            ]
+        ]);
 
 
          $notification = array(
